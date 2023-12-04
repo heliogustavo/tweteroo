@@ -16,15 +16,20 @@ app.post("/sign-up", (req, res) => {
     users.push({username, avatar})
     res.send("OK!")
   });
-
-  app.post("/tweets", (req, res) => {
+app.post("/tweets", (req, res) => {
     const {username, tweet} = req.body
     const userExist = users.find((user) => user.username === username)
       if(!userExist) return res.send("UNAUTHORIZED")
       tweets.push({username, tweet})
       res.send("OK!")
-
   })
+app.get("/tweets", (req, res) => {
+    const completTweets =tweets.map((tweet)=>{
+    const user = users.find((user) => user.username === tweet.username)
+    return {...tweet, avatar: user.avatar}
+  })
+    res.send(completTweets)
+})
 
 
 
