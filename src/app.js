@@ -17,6 +17,15 @@ app.post("/sign-up", (req, res) => {
     res.send("OK!")
   });
 
+  app.post("/tweets", (req, res) => {
+    const {username, tweet} = req.body
+    const userExist = users.find((user) => user.username === username)
+      if(!userExist) return res.send("UNAUTHORIZED")
+      tweets.push({username, tweet})
+      res.send("OK!")
+
+  })
+
 
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
