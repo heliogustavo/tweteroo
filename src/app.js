@@ -28,7 +28,7 @@ app.get("/tweets", (req, res) => {
     const user = users.find((user) => user.username === tweet.username)
     return {...tweet, avatar: user.avatar}
   })
-    res.send(completTweets)
+    res.send(completTweets.slice(-10).reverse())   //o reverse() faz o ultimo adicionado seja o primeiro exibido
 })
 
 
